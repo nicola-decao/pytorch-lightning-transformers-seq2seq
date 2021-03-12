@@ -46,5 +46,3 @@ if __name__ == "__main__":
     model = Seq2SeqModel(**vars(args))
 
     trainer.fit(model)
-
-#     python scripts/train_bart_seq2seq_source_to_query.py --gpus 4 --accelerator ddp --batch_size 128 --num_workers 1
