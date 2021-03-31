@@ -5,8 +5,8 @@ from pytorch_lightning import LightningModule
 from pytorch_lightning.metrics import Accuracy
 from torch.utils.data import DataLoader
 from transformers import (
-    AutoForConditionalGeneration,
-    AutoTokenizer,
+    BartForConditionalGeneration,
+    BartTokenizer,
     get_linear_schedule_with_warmup,
 )
 
@@ -14,7 +14,7 @@ from src.data.seq2seq import Seq2SeqDataset
 from src.utils import label_smoothed_nll_loss
 
 
-class Seq2SeqModel(LightningModule):
+class BartSeq2SeqModel(LightningModule):
     @staticmethod
     def add_model_specific_args(parent_parser):
         parser = ArgumentParser(parents=[parent_parser], add_help=False)
@@ -33,8 +33,8 @@ class Seq2SeqModel(LightningModule):
     def __init__(self, *args, **kwargs):
         super().__init__()
         self.save_hyperparameters()
-        self.tokenizer = AutoTokenizer.from_pretrained(self.hparams.model_name)
-        self.model = AutoForConditionalGeneration.from_pretrained(
+        self.tokenizer = BartTokenizer.from_pretrained(self.hparams.model_name)
+        self.model = BartForConditionalGeneration.from_pretrained(
             self.hparams.model_name
         )
 
